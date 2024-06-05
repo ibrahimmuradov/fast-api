@@ -30,7 +30,7 @@ async def book_detail(
         book_id: Annotated[int, Path(name="The Book ID")],
         session: Session = Depends(get_session)
 ) -> Book:
-    book = session.get(Book, book_id) # .get(Book, book_id) - retrieves a specific book by ID.
+    book = session.get(Book, book_id)  # .get(Book, book_id) - retrieves a specific book by ID.
 
     if book is None:
         raise HTTPException(status_code=404, detail="Book not found")
@@ -53,6 +53,6 @@ async def book_create(
             session.add(publisher_obj)
 
     session.commit()  # commits the transaction.
-    session.refresh(create_book)  # refreshes the create_book instance to reflect the committed state.
+    session.refresh(create_book)  # refreshes the create_book instance to reflect the committed state
 
     return create_book
